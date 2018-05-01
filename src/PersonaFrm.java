@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -38,8 +41,10 @@ public class PersonaFrm extends javax.swing.JFrame {
         lblEstado = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         btnInsertar = new javax.swing.JButton();
-        txtEdad = new javax.swing.JLabel();
-        txtGenero1 = new javax.swing.JTextField();
+        lblEdad = new javax.swing.JLabel();
+        txtEdad = new javax.swing.JTextField();
+        btnListar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,8 +75,26 @@ public class PersonaFrm extends javax.swing.JFrame {
             }
         });
 
-        txtEdad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtEdad.setText("Edad");
+        lblEdad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblEdad.setText("Edad");
+
+        btnListar.setBackground(new java.awt.Color(255, 255, 0));
+        btnListar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+
+        btnConsultar.setBackground(new java.awt.Color(255, 0, 0));
+        btnConsultar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,14 +128,17 @@ public class PersonaFrm extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblGenero, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtEdad))
+                                        .addComponent(lblEdad))
                                     .addGap(15, 15, 15)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtGenero1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                        .addComponent(txtGenero))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(btnInsertar)))
+                                        .addComponent(txtEdad, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                        .addComponent(txtGenero))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnInsertar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnListar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnConsultar)))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,15 +164,18 @@ public class PersonaFrm extends javax.swing.JFrame {
                     .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEdad)
-                    .addComponent(txtGenero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEdad)
+                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEstado)
                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(btnInsertar)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnInsertar)
+                    .addComponent(btnListar)
+                    .addComponent(btnConsultar))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -158,6 +187,23 @@ public class PersonaFrm extends javax.swing.JFrame {
         per.insertarPersona(Integer.parseInt(txtIdentificacion.getText()), txtNombres.getText(), txtApellidos.getText(), txtGenero.getText(), Integer.parseInt(txtEdad.getText()), txtEstado.getText());
         
     }//GEN-LAST:event_btnInsertarActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        
+        Persona per = new Persona();
+        String lista = per.listarPersona();
+        JOptionPane.showMessageDialog(null, lista);
+        
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        
+        Persona per = new Persona();
+        int cedula = Integer.parseInt(txtIdentificacion.getText());
+        String lista = per.consultarPersona(cedula);
+        JOptionPane.showMessageDialog(null, lista);
+        
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,18 +241,20 @@ public class PersonaFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnInsertar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblApellidos;
+    private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblPersona;
     private javax.swing.JTextField txtApellidos;
-    private javax.swing.JLabel txtEdad;
+    private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtGenero;
-    private javax.swing.JTextField txtGenero1;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
