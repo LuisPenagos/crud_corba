@@ -60,12 +60,50 @@ public class Persona extends PersonaApp.personaPOA{
 
     @Override
     public boolean eliminarPersona(int cedula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+         boolean resultado = false;
+        try {
+            String query = "Delete from persona WHERE cedula =" + cedula;
+            
+           conex.conexion();
+           Statement st = conex.conex.createStatement();
+           int valor = st.executeUpdate(query);
+           if(valor > 0){
+               resultado = true;
+           }
+               //Cerramos los recursos.
+           st.close();
+           conex.conex.close();
+              
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un Error "+e.getMessage());
+        }
+        return resultado;
+      
     }
 
     @Override
     public boolean actualizarPersona(int cedula, String nombre, String apellido, String genero, int edad, String estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        boolean resultado = false;
+        try {
+            String query = "update persona set nombre = '"+nombre+"' , apellido = '"+apellido+"' , genero = '"+genero+"' , edad = '"+edad+"' , estado = '"+estado+"' WHERE cedula = " +cedula;
+            
+           conex.conexion();
+           Statement st = conex.conex.createStatement();
+           int valor = st.executeUpdate(query);
+           if(valor > 0){
+               resultado = true;
+           }
+               //Cerramos los recursos.
+           st.close();
+           conex.conex.close();
+              
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un Error "+e.getMessage());
+        }
+        return resultado;
+        
     }
 
     @Override
