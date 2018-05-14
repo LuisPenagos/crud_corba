@@ -12,7 +12,8 @@ public class Persona extends PersonaApp.personaPOA{
     public boolean insertarPersona(int cedula, String nombre, String apellido, String genero, int edad, String estado) {
         boolean resultado = false;
         try {
-            String query = "insert into persona(cedula,nombre,apellido,genero,edad,estado)" + "values ('"+cedula+"','"+nombre+"','"+apellido+"','"+genero+"','"+edad+"','"+estado+"')";
+            String query = "insert into persona(cedula,nombre,apellido,genero,edad,estado)" + "values "
+                    + "('"+cedula+"','"+nombre+"','"+apellido+"','"+genero+"','"+edad+"','"+estado+"')";
             
            conex.conexion();
            Statement st = conex.conex.createStatement();
@@ -29,8 +30,8 @@ public class Persona extends PersonaApp.personaPOA{
         }
         return resultado;
     }
-    @Override
     
+    @Override
     public String consultarPersona(int cedula) {
         
         String resultado = "" ;
