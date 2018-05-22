@@ -155,5 +155,20 @@ public class Persona extends PersonaApp.personaPOA{
         return resultado;
     }
     
+    public ResultSet cargarTablaPersona(){
+    
+        ResultSet resultado = null;
+        
+        try {
+            String query = "Select cedula, nombre, apellido from persona";
+            conex.conexion();
+            Statement st = conex.conex.createStatement();
+            resultado = st.executeQuery(query);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un Error"+e.getMessage());
+        }
+
+        return resultado;
+    }
     
 }
