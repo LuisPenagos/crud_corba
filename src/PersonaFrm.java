@@ -18,6 +18,7 @@ public class PersonaFrm extends javax.swing.JFrame {
 
     //Atributo para cargar el combo
     private DefaultComboBoxModel modeloCombo;
+    private DefaultComboBoxModel modeloGenero;
     private DefaultTableModel modeloTabla;
     
     
@@ -27,6 +28,7 @@ public class PersonaFrm extends javax.swing.JFrame {
      */
     public PersonaFrm() {
         modeloCombo = new DefaultComboBoxModel(new String [] {});
+        modeloGenero = new DefaultComboBoxModel(new String [] {});
         modeloTabla = new DefaultTableModel(null, getColum());
         
         initComponents();
@@ -34,11 +36,17 @@ public class PersonaFrm extends javax.swing.JFrame {
         
         Persona objPersona = new Persona();
         ResultSet estados;
+        ResultSet genero;
         estados = objPersona.listaEstados();
+        genero = objPersona.cargarTablaGenero();
         
         try {
             while(estados.next()){
                 modeloCombo.addElement(new Estado(estados.getInt("id"), estados.getString("nombre")));
+            }
+            while (genero.next()) {
+                modeloGenero.addElement(new Genero(genero.getInt("id"), genero.getString("nombre")));
+  
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un Error: "+e.getMessage());
@@ -88,7 +96,6 @@ public class PersonaFrm extends javax.swing.JFrame {
         lblApellidos = new javax.swing.JLabel();
         txtApellidos = new javax.swing.JTextField();
         lblGenero = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JTextField();
         lblEstado = new javax.swing.JLabel();
         btnInsertar = new javax.swing.JButton();
         lblEdad = new javax.swing.JLabel();
@@ -102,6 +109,7 @@ public class PersonaFrm extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         BtnSalir = new javax.swing.JButton();
         BtnMenu = new javax.swing.JButton();
+        cboGenero = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -195,6 +203,9 @@ public class PersonaFrm extends javax.swing.JFrame {
             }
         });
 
+        cboGenero.setForeground(new java.awt.Color(153, 255, 0));
+        cboGenero.setModel(modeloGenero);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,21 +228,9 @@ public class PersonaFrm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnConsultar))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEstado)
-                        .addGap(18, 18, 18)
-                        .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblPersona)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblGenero, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblEdad))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEdad, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(txtGenero)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblApellidos)
@@ -240,7 +239,17 @@ public class PersonaFrm extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(lblNombres)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblGenero)
+                            .addComponent(lblEstado)
+                            .addComponent(lblEdad))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboGenero, 0, 98, Short.MAX_VALUE)
+                            .addComponent(txtEdad))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -270,19 +279,19 @@ public class PersonaFrm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellidos)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGenero)
-                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEdad)
                     .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGenero)
+                    .addComponent(cboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEstado)
                     .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsertar)
                     .addComponent(btnListar)
@@ -293,7 +302,7 @@ public class PersonaFrm extends javax.swing.JFrame {
                     .addComponent(btnActualizar))
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -310,10 +319,12 @@ public class PersonaFrm extends javax.swing.JFrame {
         Persona per = new Persona();
         
         Estado objEstado = (Estado) cboEstado.getSelectedItem();
+        Genero objGenero = (Genero) cboGenero.getSelectedItem();
         String estado = objEstado.getNombre();
+        String genero = objGenero.getNombre();
         
         boolean resultado = per.insertarPersona(Integer.parseInt(txtIdentificacion.getText()), 
-                txtNombres.getText(), txtApellidos.getText(), txtGenero.getText(), Integer.parseInt(txtEdad.getText()), 
+                txtNombres.getText(), txtApellidos.getText(), genero, Integer.parseInt(txtEdad.getText()), 
                 estado);
         
         if(resultado==true){
@@ -346,9 +357,11 @@ public class PersonaFrm extends javax.swing.JFrame {
         
         Estado objEstado = (Estado) cboEstado.getSelectedItem();
         String estado = objEstado.getNombre();
+        Genero objGenero = (Genero) cboGenero.getSelectedItem();
+        String genero = objGenero.getNombre();
         
         boolean resultado = per.actualizarPersona(Integer.parseInt(txtIdentificacion.getText()), 
-                txtNombres.getText(), txtApellidos.getText(), txtGenero.getText(), 
+                txtNombres.getText(), txtApellidos.getText(), genero, 
                 Integer.parseInt(txtEdad.getText()), estado);
         if(resultado==true){
             JOptionPane.showMessageDialog(null, "Los Datos Se Actualizaron");
@@ -424,6 +437,7 @@ public class PersonaFrm extends javax.swing.JFrame {
     private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnListar;
     private javax.swing.JComboBox<String> cboEstado;
+    private javax.swing.JComboBox<String> cboGenero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -435,7 +449,6 @@ public class PersonaFrm extends javax.swing.JFrame {
     private javax.swing.JLabel lblPersona;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtEdad;
-    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables

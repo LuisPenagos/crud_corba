@@ -9,4 +9,20 @@ module PersonaApp{
         wstring listarPersona();
         oneway void shutdawn();
     };
+    interface genero{
+        boolean insertarGenero(in long id, in wstring nombre);
+        wstring consultarGenero(in long id);
+        boolean eliminarGenero(in long nombre);
+        boolean actualizarGenero(in long id, in wstring nombre);
+        wstring listarGenero();
+        oneway void shutdawn();
+    };
+    interface estado{
+        boolean insertarEstado(in long id, in wstring nombre);
+        wstring consultarEstado(in long id);
+        boolean eliminarEstado(in long nombre);
+        boolean actualizarEstado(in long id, in wstring nombre);
+        wstring listarEstado();
+        oneway void shutdawn();
+    };
 };

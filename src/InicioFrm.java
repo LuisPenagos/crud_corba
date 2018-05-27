@@ -30,6 +30,7 @@ public class InicioFrm extends javax.swing.JFrame {
         BtnGeneroFrm = new javax.swing.JButton();
         BtnEstadoFrm = new javax.swing.JButton();
         Inicio = new javax.swing.JLabel();
+        BtnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,22 +54,33 @@ public class InicioFrm extends javax.swing.JFrame {
         Inicio.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         Inicio.setText("Bienvenidos");
 
+        BtnSalir.setBackground(new java.awt.Color(204, 0, 153));
+        BtnSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BtnSalir.setText("Salir");
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnPersonaFrm)
-                .addGap(40, 40, 40)
-                .addComponent(BtnGeneroFrm)
-                .addGap(37, 37, 37)
-                .addComponent(BtnEstadoFrm)
-                .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(Inicio)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnPersonaFrm)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnGeneroFrm, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(BtnEstadoFrm)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,17 +92,23 @@ public class InicioFrm extends javax.swing.JFrame {
                     .addComponent(BtnPersonaFrm)
                     .addComponent(BtnGeneroFrm)
                     .addComponent(BtnEstadoFrm))
-                .addGap(52, 52, 52))
+                .addGap(18, 18, 18)
+                .addComponent(BtnSalir)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPersonaFrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPersonaFrmActionPerformed
-        PersonaFrm verFormularioPersona=new PersonaFrm();
+        PersonaFrm verFormularioPersona = new PersonaFrm();
         verFormularioPersona.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BtnPersonaFrmActionPerformed
+
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BtnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +149,7 @@ public class InicioFrm extends javax.swing.JFrame {
     private javax.swing.JButton BtnEstadoFrm;
     private javax.swing.JButton BtnGeneroFrm;
     private javax.swing.JButton BtnPersonaFrm;
+    private javax.swing.JButton BtnSalir;
     private javax.swing.JLabel Inicio;
     // End of variables declaration//GEN-END:variables
 }
