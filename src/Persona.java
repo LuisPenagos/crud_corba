@@ -31,6 +31,7 @@ public class Persona extends PersonaApp.personaPOA{
         return resultado;
     }
     
+    
     @Override
     public String consultarPersona(int cedula) {
         
@@ -54,9 +55,7 @@ public class Persona extends PersonaApp.personaPOA{
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, "Ocurrio un Error: "+e.getMessage());
         }
-      
       return resultado;
-        
     }
 
     @Override
@@ -80,8 +79,8 @@ public class Persona extends PersonaApp.personaPOA{
             JOptionPane.showMessageDialog(null, "Ocurrio un Error "+e.getMessage());
         }
         return resultado;
-      
     }
+
 
     @Override
     public boolean actualizarPersona(int cedula, String nombre, String apellido, String genero, int edad, String estado) {
@@ -104,7 +103,6 @@ public class Persona extends PersonaApp.personaPOA{
             JOptionPane.showMessageDialog(null, "Ocurrio un Error "+e.getMessage());
         }
         return resultado;
-        
     }
 
     @Override
@@ -129,7 +127,6 @@ public class Persona extends PersonaApp.personaPOA{
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, "Ocurrio un Error: "+e.getMessage());
         }
-      
       return resultado;
     }
 
@@ -150,8 +147,7 @@ public class Persona extends PersonaApp.personaPOA{
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un Error: "+e.getMessage());
         }
-        
-        
+
         return resultado;
     }
     
