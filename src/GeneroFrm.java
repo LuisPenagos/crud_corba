@@ -1,15 +1,6 @@
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author lucho
- */
 public class GeneroFrm extends javax.swing.JFrame {
 
 
@@ -18,8 +9,7 @@ public class GeneroFrm extends javax.swing.JFrame {
      */
     public GeneroFrm() {
         initComponents();
-        
-        
+       
     }
 
     /**
@@ -202,9 +192,9 @@ public class GeneroFrm extends javax.swing.JFrame {
 
     private void btnInsertarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarGeneroActionPerformed
 
-        Genero gen = new Genero();
+        Persona per = new Persona();
 
-        boolean resultado = gen.insertarGenero(Integer.parseInt(txtId.getText()),txtNombre.getText());
+        boolean resultado = per.insertarGenero(Integer.parseInt(txtId.getText()),txtNombre.getText());
 
         if(resultado==true){
             JOptionPane.showMessageDialog(null, "Los Datos Se Insertaron");
@@ -215,26 +205,26 @@ public class GeneroFrm extends javax.swing.JFrame {
 
     private void btnListarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarGeneroActionPerformed
 
-        Genero gen = new Genero();
-        String lista = gen.listarGenero();
+        Persona per = new Persona();
+        String lista = per.listarGenero();
         JOptionPane.showMessageDialog(null, lista);
 
     }//GEN-LAST:event_btnListarGeneroActionPerformed
 
     private void btnConsultarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarGeneroActionPerformed
 
-        Genero gen = new Genero();
+        Persona per = new Persona();
         int id = Integer.parseInt(txtId.getText());
-        String lista = gen.consultarGenero(id);
+        String lista = per.consultarGenero(id);
         JOptionPane.showMessageDialog(null, lista);
 
     }//GEN-LAST:event_btnConsultarGeneroActionPerformed
 
     private void btnActualizarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarGeneroActionPerformed
 
-        Genero gen = new Genero();
+        Persona per = new Persona();
 
-        boolean resultado = gen.actualizarGenero(Integer.parseInt(txtId.getText()),
+        boolean resultado = per.actualizarGenero(Integer.parseInt(txtId.getText()),
             txtNombre.getText());
         if(resultado==true){
             JOptionPane.showMessageDialog(null, "Los Datos Se Actualizaron");
@@ -245,8 +235,8 @@ public class GeneroFrm extends javax.swing.JFrame {
 
     private void btnEliminarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarGeneroActionPerformed
 
-        Genero gen = new Genero();
-        boolean resultado = gen.eliminarGenero(Integer.parseInt(txtId.getText()));
+        Persona per = new Persona();
+        boolean resultado = per.eliminarGenero(Integer.parseInt(txtId.getText()));
 
         if(resultado==true){
             JOptionPane.showMessageDialog(null, "Los Datos Se Eliminaron");

@@ -202,7 +202,7 @@ public class EstadoFrm extends javax.swing.JFrame {
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
 
-        Estado est = new Estado();
+        Persona per = new Persona();
 
         boolean resultado = per.insertarEstado(Integer.parseInt(txtId.getText()),
             txtNombre.getText());
@@ -216,24 +216,24 @@ public class EstadoFrm extends javax.swing.JFrame {
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
 
-        Estado est = new Estado();
-        String lista = est.listarEstado();
+        Persona per = new Persona();
+        String lista = per.listarEstado();
         JOptionPane.showMessageDialog(null, lista);
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
 
-        Estado est = new Estado();
+        Persona per = new Persona();
         int id = Integer.parseInt(txtId.getText());
-        String lista = est.consultarEstado(id);
+        String lista = per.consultarEstado(id);
         JOptionPane.showMessageDialog(null, lista);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
-        Estado est = new Estado();
+        Persona per = new Persona();
 
-        boolean resultado = est.actualizarEstado(Integer.parseInt(txtId.getText()),txtNombre.getText());
+        boolean resultado = per.actualizarEstado(Integer.parseInt(txtId.getText()),txtNombre.getText());
         if(resultado==true){
             JOptionPane.showMessageDialog(null, "Los Datos Se Actualizaron");
         }else{

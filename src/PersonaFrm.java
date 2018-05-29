@@ -60,7 +60,7 @@ public class PersonaFrm extends javax.swing.JFrame {
      */
     
     private String[] getColum(){
-        String columnas[] = new String[]{"cedula","nombre","apellido"};
+        String columnas[] = new String[]{"cedula","nombre","apellido","genero","edad","estado"};
         return columnas;
     }
     
@@ -71,9 +71,9 @@ public class PersonaFrm extends javax.swing.JFrame {
         ResultSet Resultado = objPersona.cargarTablaPersona();
         
         try {
-            Object dato [] = new Object[3];
+            Object dato [] = new Object[6];
             while (Resultado.next()) {
-                for (int i=0; i<3; i++) {
+                for (int i=0; i<6; i++) {
                     dato[i] = Resultado.getObject(i+1);
                 }
                 modeloTabla.addRow(dato);
@@ -106,10 +106,12 @@ public class PersonaFrm extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         cboEstado = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTablel = new javax.swing.JTable();
         BtnSalir = new javax.swing.JButton();
         BtnMenu = new javax.swing.JButton();
         cboGenero = new javax.swing.JComboBox<>();
+        txtGenero = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,8 +184,13 @@ public class PersonaFrm extends javax.swing.JFrame {
         cboEstado.setForeground(new java.awt.Color(153, 255, 0));
         cboEstado.setModel(modeloCombo);
 
-        jTable1.setModel(modeloTabla);
-        jScrollPane1.setViewportView(jTable1);
+        JTablel.setModel(modeloTabla);
+        JTablel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTablelMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JTablel);
 
         BtnSalir.setBackground(new java.awt.Color(255, 0, 0));
         BtnSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -212,7 +219,7 @@ public class PersonaFrm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(jLabel1))
@@ -241,26 +248,34 @@ public class PersonaFrm extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblGenero)
-                            .addComponent(lblEstado)
-                            .addComponent(lblEdad))
+                        .addComponent(lblEdad)
                         .addGap(18, 18, 18)
+                        .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblGenero)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEstado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cboGenero, 0, 98, Short.MAX_VALUE)
-                            .addComponent(txtEdad))))
+                            .addComponent(cboGenero, 0, 98, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(24, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 443, Short.MAX_VALUE)
                         .addComponent(BtnMenu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnSalir)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,15 +298,21 @@ public class PersonaFrm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEdad)
                     .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGenero)
-                    .addComponent(cboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEstado)
-                    .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGenero)
+                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEstado)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsertar)
                     .addComponent(btnListar)
@@ -393,6 +414,36 @@ public class PersonaFrm extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_BtnSalirActionPerformed
 
+    private void JTablelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablelMouseClicked
+        int seleccion;
+        try {seleccion = JTablel.getSelectedRow();
+        
+        if (seleccion == -1){
+            JOptionPane.showMessageDialog(null, "No Se Ha Seleccionado Ningun Valor");
+        }else{
+            DefaultTableModel modeloTabla = (DefaultTableModel) JTablel.getModel();
+            String cedula = (String) modeloTabla.getValueAt(seleccion, 0).toString();
+            String nombre = (String) modeloTabla.getValueAt(seleccion, 1);
+            String apellido = (String) modeloTabla.getValueAt(seleccion, 2);
+            String edad = (String) modeloTabla.getValueAt(seleccion, 4).toString();
+            String genero = (String) modeloTabla.getValueAt(seleccion, 3);
+            String estado = (String) modeloTabla.getValueAt(seleccion, 5);
+            
+            txtIdentificacion.setText(cedula);
+            txtNombres.setText(nombre);
+            txtApellidos.setText(apellido);
+            txtEdad.setText(edad);
+            txtGenero.setText(genero);
+            txtEstado.setText(estado);
+ 
+ 
+        }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se Ha Producido Un Error" +e.getMessage());
+        }
+    }//GEN-LAST:event_JTablelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -422,6 +473,7 @@ public class PersonaFrm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new PersonaFrm().setVisible(true);
             }
@@ -431,6 +483,7 @@ public class PersonaFrm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnMenu;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JTable JTablel;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminar;
@@ -440,7 +493,6 @@ public class PersonaFrm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboGenero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblEstado;
@@ -449,6 +501,8 @@ public class PersonaFrm extends javax.swing.JFrame {
     private javax.swing.JLabel lblPersona;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtEstado;
+    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
